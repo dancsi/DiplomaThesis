@@ -1,0 +1,145 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% zakljucna_FAMNIT_1_stopnja_MA_MEF_EN_2016.sty
+% verzija februar 2016
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sets that figures and tables are counted independently of chapters
+\usepackage{chngcntr}
+\counterwithout{table}{chapter}
+\counterwithout{figure}{chapter}
+\addtocounter{table}{-1}
+
+% Designing the chapter titles (without the word "Chapter", just chapter number and chapter title)
+\makeatletter
+\def\@makechapterhead#1{%
+  \vspace*{30\p@}%
+  {\noindent\Huge\bf\thechapter \hspace*{0.5cm} \parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@M
+    \Huge \bfseries #1\par\nobreak
+    \vskip 30\p@
+  }}
+  \makeatother
+
+% Bibliography chapter
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\thebibliography}{%
+  \chapter*{\bibname}\@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}}{%
+  \chapter{Bibliography}}{}{}
+% If you will also cite web sources, delete the line above and uncomment the next line.
+% \chapter{Bibliography and Sources}}{}{}
+\makeatother
+
+% Appendices
+\usepackage{appendix}
+\renewcommand\appendixpagename{Appendices}
+
+% List of appendices
+\usepackage{tocloft}
+
+\newcommand{\listappendicesname}{Appendices}
+\newlistof{appendices}{apc}{\listappendicesname}
+\renewcommand{\appendices}[1]{\addcontentsline{apc}{appendices}{#1}}
+
+% List of abbreviations
+\usepackage{longtable}
+\newcommand\nomenclature[2]{#1 & #2 \\}
+
+\usepackage[dvips]{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{fix-cm}
+\usepackage{cite}
+\usepackage{color}
+
+% Package for display of page numbers where references are cited.
+% The package is not compatible with package hyperref (for adding hyperlinks).
+% If you do not wish to use this package, then comment out the next 10 lines.
+%\usepackage[pageref]{backref}
+%\usepackage{url}
+%\def\backreftwosep{ and~}
+%\def\backreflastsep{, and~}
+%\renewcommand*{\backref}[1]{}
+%\renewcommand*{\backrefalt}[4]{%
+%    \ifcase #1 {\it (Not cited.)}%
+%    \or        {\it (Cited on page~#2.)}%
+%    \else      {\it (Cited on pages~#2.)}%
+%    \fi}
+
+% package for writing algorithm pseudocodes
+%\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{algorithm, algpseudocode}
+
+% ------------- NEW COMMANDS -----------------
+
+% The following are the options for bibliography items.
+% The fonts will be automatically changed (to small caps or italic), all you need to do is to specify the authors, title, etc. (in the main file).
+\newcommand{\bookOneAuthor}[3]{{\sc #1}, {\it #2}, #3.}
+\newcommand{\bookTwoAuthors}[4]{{\sc #1} and {\sc #2}, {\it #3}. #4.}
+\newcommand{\bookManyAuthors}[4]{{\sc #1}, and {\sc #2}, {\it #3}. #4.}
+
+\newcommand{\articleInJournalOneAuthor}[6]{{\sc #1}, {#2}. {\it #3} {#4} (#5) #6.}
+\newcommand{\articleInJournalTwoAuthors}[7]{{\sc #1} and {\sc #2}, {#3}. {\it #4} {#5} (#6) #7.}
+\newcommand{\articleInJournalManyAuthors}[7]{{\sc #1}, and {\sc #2}, {#3}. {\it #4} {#5} (#6) #7.}
+
+\newcommand{\articleInJournalOneAuthorAccepted}[3]{{\sc #1}, {#2}. {\it #3}, accepted.}
+\newcommand{\articleInJournalTwoAuthorsAccepted}[4]{{\sc #1} and {\sc #2}, {#3}. {\it #4}, accepted.}
+\newcommand{\articleInJournalManyAuthorsAccepted}[4]{{\sc #1}, and {\sc #2}, {#3}. {\it #4}, accepted.}
+
+\newcommand{\articleInJournalOneAuthorInPrint}[3]{{\sc #1}, {#2}. {\it #3}, in print.}
+\newcommand{\articleInJournalTwoAuthorsInPrint}[4]{{\sc #1} and {\sc #2}, {#3}. {\it #4}, in print.}
+\newcommand{\articleInJournalManyAuthorsInPrint}[4]{{\sc #1}, and {\sc #2}, {#3}. {\it #4}, in print.}
+
+\newcommand{\articleInJournalOneAuthorSubmitted}[3]{{\sc #1}, {#2}. {#3}, submitted.}
+\newcommand{\articleInJournalTwoAuthorsSubmitted}[4]{{\sc #1} and {\sc #2}, {#3}. {#4}, submitted.}
+\newcommand{\articleInJournalManyAuthorsSubmitted}[4]{{\sc #1}, and {\sc #2}, {#3}. {#4}, submitted.}
+
+\newcommand{\bookChapterOneAuthor}[6]{{\sc #1}, {#2}. In: {#3}, {\it #4}, {#5}, {#6}.}
+\newcommand{\bookChapterTwoAuthors}[7]{{\sc #1} and {\sc #2}, {#3}. In: {#4}, {\it #5}, {#6}, {#7}.}
+\newcommand{\bookChapterManyAuthors}[7]{{\sc #1}, and {\sc #2}, {#3}. In: {#4}, {\it #5}, {#6}, {#7}.}
+
+\newcommand{\conferenceArticleOneAuthor}[5]{{\sc #1}, {#2}. In {\it #3}, {#4}, #5.}
+\newcommand{\conferenceArticleTwoAuthors}[6]{{\sc #1} and {\sc #2}, {#3}. In {\it #4}, {#5}, #6.}
+\newcommand{\conferenceArticleManyAuthors}[6]{{\sc #1}, and {\sc #2}, {#3}. In {\it #4}, {#5}, #6.}
+
+\newcommand{\PhDDissertation}[3]{{\sc #1}, {\it #2},\, {#3}.}
+
+\newcommand{\webPageNoAuthor}[5]{{\it #1},\, {\texttt{#2}}. (Viewed on: {#3}/{#4}/{#5}.)}
+\newcommand{\webPageNoAuthorWithInstitution}[6]{{\it #1},\, {#2}. {\texttt{#3}}. (Viewed on: {#4}/{#5}/{#6}.)}
+\newcommand{\webPageOneAuthor}[6]{{\sc #1}, {\it #2},\, {\texttt{#3}}. (Viewed on: {#4}/{#5}/{#6}.)}
+\newcommand{\webPageTwoAuthors}[7]{{\sc #1} and {\sc #2}, {\it #3},\, {\texttt{#4}}. (Viewed on: {#5}/{#6}/{#7}.)}
+\newcommand{\webPageManyAuthors}[7]{{\sc #1}, and {\sc #2}, {\it #3},\, {\texttt{#4}}. (Viewed on: {#5}/{#6}/{#7}.)}
+
+
+% Spacing between lines is set to 1.25 (the default value is 1).
+\renewcommand{\baselinestretch}{1.25}
+
+% Environments: definnition, example, theorem, lemma, corollary, proposition, remark
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{example}[definition]{Example}
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{proposition}[definition]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+
+% Text width: 155mm, text height: 242mm, (A4: 210mm x 297mm)
+\setlength{\textwidth}{155mm}
+\setlength{\textheight}{242mm}
+
+% Margins: left: 3cm, other margins: 2.5cm
+\oddsidemargin=-1in
+\setlength{\marginparsep}{0cm}
+\setlength{\marginparwidth}{0cm}
+\setlength{\oddsidemargin}{0.46cm}
+
+\setlength{\headheight}{0.82cm}
+\setlength{\topmargin}{-1.04cm}
+\setlength{\headsep}{0.68cm}
+
+\usepackage{fancyhdr}
+
+\endinput
